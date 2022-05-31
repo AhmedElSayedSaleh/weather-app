@@ -1,0 +1,202 @@
+/*
+**  direction setting variables 
+*/
+/*
+**  font family setting variables 
+*/
+/*******************************  import All used scss files   ******************************/
+/*
+**  Font size variables 
+*/
+/*
+** Colors variables 
+*/
+/*
+**  No function need to implement this web app.
+*/
+/*
+**  clearfix mixin  
+*/
+/****************** MEDIA QUERY MANAGER *****************/
+/*
+** Bootstrap 5 breakpoints
+**  xs: 0, // X-Small devices (portrait phones, less than 576px)
+**  sm: 576px, // Small devices (landscape phones, less than 768px)
+**  md: 768px,  // Medium devices (tablets, less than 992px)
+**  lg: 992px,// Large devices (desktops, less than 1200px)
+**  xl: 1200px,// X-Large devices (large desktops, less than **1400px)
+** xxl: 1400px  
+*/
+/*
+**  Desktop First MEDIA QUERY MANAGER Mixin.
+**  we used bootstrap5 Breakpoints in px.
+**  we use Max-width We occasionally use media queries that go the given screen size or smaller) --> max-width and down. 
+*/
+/*
+**  Mobile First MEDIA QUERY MANAGER Mixin.
+**  we used bootstrap5 Breakpoints in px.
+**  we use Min-width We occasionally use media queries that go the given screen size or larger) --> min-width and up. 
+*/
+/*
+**  Single Breakpoint MEDIA QUERY MANAGER Mixin.
+**  we used bootstrap5 Breakpoints in px.
+**  we use Min-width & max-width to specify the a single breakpoin 
+*/
+/*
+**  Between Breakpoints MEDIA QUERY MANAGER Mixin.
+**  we used bootstrap5 Breakpoints in px.
+**  Similarly, media queries may span multiple breakpoints widths:
+**  we use Min-width & max-width to specify the a range breakpoint 
+*/
+/*
+**  Work Sans Font =>   font-family: "Work Sans" , sans-serif;
+*/
+@font-face {
+  font-family: "Work Sans";
+  src: url("../fonts/Work_Sans/WorkSans-Regular.eot");
+  /* IE9 Compat Modes */
+  src: url("../fonts/Work_Sans/WorkSans-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/Work_Sans/WorkSans-Regular.woff2") format("woff2"), url("../fonts/Work_Sans/WorkSans-Regular.woff") format("woff"), url("../fonts/Work_Sans/WorkSans-Regular.ttf") format("truetype"), url("../fonts/Work_Sans/WorkSans-Regular.svg#svgFontName") format("svg");
+  /* Legacy iOS */ }
+
+/*
+**  CSS Initializati Reset
+*/
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit; }
+
+/*
+**  Set root font => to set the default 1rem unit value
+*/
+html {
+  font-size: 62.5%;
+  /* 1rem = 10px -->  10/16 *100% = 62.5% */ }
+
+/*
+**  Set default inherited properties in body element 
+*/
+body {
+  background-color: white;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: "Work Sans", sans-serif;
+  font-size: 1.6rem;
+  font-weight: normal;
+  line-height: 1.83;
+  color: white; }
+
+/*
+**  Reset builts of ul and ol  Lists.
+*/
+ul,
+ol {
+  list-style-type: none;
+  margin: 0;
+  padding: 0; }
+
+/*
+**  define temperature degree to top of temperature 
+*/
+.temperature-degree {
+  vertical-align: super; }
+
+.temperature-btn {
+  cursor: pointer; }
+  .temperature-btn--active {
+    background-color: rgba(255, 255, 255, 0.25);
+    position: relative; }
+    .temperature-btn--active::before {
+      content: "";
+      background-color: white;
+      position: absolute;
+      width: 2px;
+      height: 100%;
+      left: 0;
+      top: 0; }
+
+.weather {
+  background-image: url(../assets/images/Background.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover; }
+  .weather__head h1 {
+    font-weight: 700;
+    font-size: 3.6rem; }
+  .weather__forecast__city {
+    font-weight: 700;
+    font-size: 6.4rem; }
+  .weather__forecast__date {
+    font-weight: 700;
+    font-size: 2rem; }
+  .weather__forecast__img {
+    width: 9.7rem;
+    height: 9.7rem; }
+  .weather__forecast__title {
+    font-weight: 700;
+    font-size: 3rem; }
+  .weather__forecast__current-temperature {
+    font-weight: 700;
+    font-size: 14.4rem; }
+  .weather__forecast__temperatures-range {
+    font-weight: 400;
+    font-size: 4.8rem; }
+    .weather__forecast__temperatures-range--min {
+      color: rgba(255, 255, 255, 0.75); }
+  .weather__forecast__summary {
+    font-weight: 600;
+    font-size: 2.4rem; }
+  .weather__forecasts .item {
+    margin-left: 3rem;
+    margin-right: 3rem; }
+  .weather__forecasts .nav-tabs {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5); }
+  .weather__forecasts .nav-link {
+    font-weight: 700;
+    font-size: 2.2rem;
+    border: none;
+    color: rgba(255, 255, 255, 0.75);
+    background-color: transparent;
+    padding: 0;
+    padding-bottom: 0.5rem;
+    margin-right: 5.5rem; }
+    .weather__forecasts .nav-link.active {
+      color: white;
+      background-color: transparent;
+      position: relative; }
+      .weather__forecasts .nav-link.active::after {
+        content: "";
+        background-color: white;
+        position: absolute;
+        width: 100%;
+        height: 3px;
+        left: 0;
+        bottom: 0; }
+  .weather__forecasts__time {
+    font-weight: 400;
+    font-size: 2.4rem; }
+  .weather__forecasts__temperature {
+    font-weight: 400;
+    font-size: 3.6rem; }
+  .weather__forecasts__img {
+    width: 6.6rem !important;
+    height: 6.6rem; }
+  .weather__forecasts .owl-dot {
+    width: calc(100% / 3);
+    overflow: hidden; }
+    .weather__forecasts .owl-dot span {
+      background-color: rgba(255, 255, 255, 0.5) !important;
+      width: 100% !important;
+      height: 1px !important;
+      border-radius: 0 !important;
+      margin: 0 !important; }
+    .weather__forecasts .owl-dot.active {
+      background-color: white;
+      border-top: 2.5px solid white;
+      border-bottom: 2.5px solid white;
+      border-radius: 5px; }
+
+/*# sourceMappingURL=main-ltr.css.map */

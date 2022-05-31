@@ -1,0 +1,17 @@
+/*
+**  Work Sans Font =>   font-family: "Work Sans" , sans-serif;
+*/
+@font-face {
+  font-family: "Work Sans";
+  src: url("../fonts/Work_Sans/WorkSans-Regular.eot"); /* IE9 Compat Modes */
+  src: url("../fonts/Work_Sans/WorkSans-Regular.eot?#iefix")
+      format("embedded-opentype"),
+    /* IE6-IE8 */ url("../fonts/Work_Sans/WorkSans-Regular.woff2")
+      format("woff2"),
+    /* Super Modern Browsers */ url("../fonts/Work_Sans/WorkSans-Regular.woff")
+      format("woff"),
+    /* Pretty Modern Browsers */ url("../fonts/Work_Sans/WorkSans-Regular.ttf")
+      format("truetype"),
+    /* Safari, Android, iOS */
+      url("../fonts/Work_Sans/WorkSans-Regular.svg#svgFontName") format("svg"); /* Legacy iOS */
+}
