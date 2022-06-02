@@ -5,8 +5,8 @@ const toggleTemp = () => {
   tempBtn.forEach((btn) => {
     btn.addEventListener("click", () => {
       tempBtn.forEach((btn) => {
-        btn.classList.remove("temperature-btn--right-active");
-        btn.classList.remove("temperature-btn--left-active");
+        btn.classListNaNpxove("temperature-btn--right-active");
+        btn.classListNaNpxove("temperature-btn--left-active");
       });
       if (btn.firstElementChild.innerHTML === "C") {
         btn.classList.add("temperature-btn--left-active");
@@ -24,52 +24,71 @@ const toggleTemp = () => {
   });
 }; // end of toggleTemp
 toggleTemp();
+
 // Get data from api
 const url =
   "https://api.darksky.net/forecast/a177f8481c31fa96c3f95ad4f4f84610/30.007414,31.491318";
-
-// fetch(url)
-//   .then((response) => {
-//     return response.json();
-//   })
-//   .then((data) => {
-//     console.log(data);
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
 
 async function getData() {
   try {
     const response = await fetch(url);
     const data = await response.json();
-    console.log(data);
+    // const {
+    //   currently: { temperature, summary, icon },
+    //   hourly: { data: hourlyData },
+    //   daily: { data: dailyData },
+    // } = data;
+    return data;
+    // console.log(data);
+    // return data;
   } catch (err) {
     console.log(err);
   }
 } // end of getData
-getData();
-// getData().then(data => {
-//   console.log(data);
-//   const {
-//     temperature,
-//     summary,
-//     icon
-//   } = data.currently;
-//   // Set DOM elements from the API
-//   temperatureDegree.textContent = temperature;
-//   temperatureDescription.textContent = summary;
-//   locationTimezone.textContent = data.timezone;
-//   // Set icon
-//   setIcons(icon, document.querySelector(".icon"));
-//   // Change temperature to Celsius/Fahrenheit
-//   temperatureSection.addEventListener("click", () => {
-//     if (temperatureSpan.textContent === "F") {
-//       temperatureSpan.textContent = "C";
-//       temperatureDegree.textContent = Math.floor((temperature - 32) * (5 / 9));
-//     } else {
-//       temperatureSpan.textContent = "F";
-//       temperatureDegree.textContent = temperature;
-//     }
-//   });
-// } );
+
+// get current date
+const getDate = () => {
+  const date = new Date().toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+  console.log(date);
+  return date;
+};
+// set date in html
+const setDate = () => {
+  const date = document.querySelector("#date");
+  date.innerHTML = getDate();
+};
+setDate();
+// set data html
+// const htmlDisplay = (data) => {
+// const {
+//   currently: { temperature, summary, icon },
+//   daily: { data: dailyData },
+//   hourly: { data: hourlyData },
+// } = data;
+// };
+
+getData().then((data) => {
+  // console.log(data);
+  const { temperature, summary, icon } = data.currently;
+  // Set DOM elements from the API
+  // temperatureDegree.textContent = temperature;
+  // temperatureDescription.textContent = summary;
+  // locationTimezone.textContent = data.timezone;
+  // // Set icon
+  // setIcons(icon, document.querySelector(".icon"));
+  // // Change temperature to Celsius/Fahrenheit
+  // temperatureSection.addEventListener("click", () => {
+  //   if (temperatureSpan.textContent === "F") {
+  //     temperatureSpan.textContent = "C";
+  //     temperatureDegree.textContent = Math.floor((temperature - 32) * (5 / 9));
+  //   } else {
+  //     temperatureSpan.textContent = "F";
+  //     temperatureDegree.textContent = temperature;
+  //   }
+  // });
+});
