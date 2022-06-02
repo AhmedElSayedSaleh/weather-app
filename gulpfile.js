@@ -72,7 +72,7 @@ function minifyLtrCss(cb) {
 }
 //#endregion
 
-//#region minifyLtrJs Task
+//#region minifyJs Task
 function minifyJs(cb) {
   src(["content/js/jquery.libraries.call.js", "content/js/main.js"])
     .pipe(concat("main.min.js"))

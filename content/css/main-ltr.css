@@ -106,16 +106,27 @@ ol {
 
 .temperature-btn {
   cursor: pointer; }
-  .temperature-btn--active {
+  .temperature-btn--right-active {
     background-color: rgba(255, 255, 255, 0.25);
     position: relative; }
-    .temperature-btn--active::before {
+    .temperature-btn--right-active::before {
       content: "";
       background-color: white;
       position: absolute;
       width: 2px;
       height: 100%;
       left: 0;
+      top: 0; }
+  .temperature-btn--left-active {
+    background-color: rgba(255, 255, 255, 0.25);
+    position: relative; }
+    .temperature-btn--left-active::after {
+      content: "";
+      background-color: white;
+      position: absolute;
+      width: 2px;
+      height: 100%;
+      right: 0;
       top: 0; }
 
 .weather {
