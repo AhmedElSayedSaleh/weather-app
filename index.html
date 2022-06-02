@@ -99,18 +99,18 @@
           <div class="col-md-6">
             <div>
               <h2 class="text-capitalize weather__forecast__city">new cairo</h2>
-              <p class="weather__forecast__date" id="date">Friday 20, 2020</p>
+              <p id="date" class="weather__forecast__date"></p>
             </div>
             <div>
-              <img class="my-3 weather__forecast__img" src="./content/assets/icons/cloudy.png" alt="weather cloud">
-              <h4 class="weather__forecast__title">Cloudy</h4>
+              <img id="icon" class="my-3 weather__forecast__img" src="./content/assets/icons/cloudy.png"
+                alt="weather cloud">
+              <h4 id="summary" class="weather__forecast__title"></h4>
             </div>
           </div>
           <div class="col-md-6">
             <div class=" d-flex flex-column align-items-end">
               <div>
-                <h2 class="text-end weather__forecast__current-temperature">
-                  72<span class="temperature-degree">&#176;</span></h2>
+                <h2 id="temp" class="text-end weather__forecast__current-temperature"></h2>
 
               </div>
               <div class="d-flex align-items-end flex-column pe-5">
@@ -120,7 +120,7 @@
                   <span class="weather__forecast__temperatures-range--min">63<span
                       class="temperature-degree">&#176;</span></span>
                 </h4>
-                <p class="weather__forecast__summary">Cloudy throughout the day</p>
+                <p id="hourly-summary" class="weather__forecast__summary"></p>
               </div>
             </div>
 
