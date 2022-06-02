@@ -2,11 +2,9 @@
 **  clearfix mixin  
 */
 @mixin clearfix {
-
-    &::after{
-        content: "";
-        clear: both;
-        display: table;
-    }
-    
+  &::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
 }

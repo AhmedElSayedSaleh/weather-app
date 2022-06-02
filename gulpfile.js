@@ -75,9 +75,11 @@ function minifyLtrCss(cb) {
 //#region minifyJs Task
 function minifyJs(cb) {
   src(["content/js/jquery.libraries.call.js", "content/js/main.js"])
+    .pipe(sourcemaps.init())
     .pipe(concat("main.min.js"))
     .pipe(babel({ presets: ["@babel/preset-env"] }))
     .pipe(minifyEs5())
+    .pipe(sourcemaps.write("."))
     .pipe(dest("content/js"));
   cb();
 }
