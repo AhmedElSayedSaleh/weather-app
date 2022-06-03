@@ -1,4 +1,4 @@
-window.addEventListener("load", () => {
+document.addEventListener("DOMContentLoaded", () => {
   // Celsius/Fahrenheit buttons toggle
   const toggleTemp = () => {
     const tempBtn = document.querySelectorAll(".temperature-btn");
