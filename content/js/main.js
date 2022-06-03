@@ -97,7 +97,6 @@ getData().then((data) => {
     );
     const timeEl = document.createElement("p");
     timeEl.classList.add("weather__forecasts__time");
-    // console.log(new Date(time * 1000).getHours());
     if (new Date(time * 1000).getHours() === new Date().getHours()) {
       timeEl.innerHTML = "Now";
     } else {
