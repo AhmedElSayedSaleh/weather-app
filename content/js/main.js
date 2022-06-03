@@ -62,21 +62,14 @@ async function getData() {
 }
 
 // display weather in html
-// const htmlDisplay = (data) => {
-// const {
-//   currently: { temperature, summary, icon },
-//   daily: { data: dailyData },
-//   hourly: { data: hourlyData },
-// } = data;
-// };
-
 getData().then((data) => {
   console.log(data);
   const { currently, daily, hourly } = data;
   const { temperature, summary, icon } = currently;
-  const { data: dailyData } = daily;
   const { data: hourlyData } = hourly;
+  const { data: dailyData } = daily;
 
+  // display current weather
   const temp = document.querySelector("#temp");
   temp.innerHTML = `${Math.round(
     temperature
@@ -91,48 +84,73 @@ getData().then((data) => {
   const hourlySummary = document.querySelector("#hourly-summary");
   hourlySummary.innerHTML = hourly.summary;
 
+  // display hourly weather
   const hourlyEl = document.querySelector("#hourly");
-  hourlyEl.innerHTML = hourlyData.map((hour) => {
+  hourlyData.forEach((hour) => {
     const { time, icon, temperature } = hour;
-    return `
-    <div class="hourly-item">
-      <div class="hourly-item__time">${time}</div>
-      <div class="hourly-item__icon">${icon}</div>
-      <div class="hourly-item__temp">${Math.round(temperature)}&deg;C</div>
-    </div>
-    `;
-  });
+    const hourlyContainer = document.createElement("div");
+    hourlyContainer.classList.add(
+      "item",
+      "d-flex",
+      "flex-column",
+      "align-items-center"
+    );
+    const timeEl = document.createElement("p");
+    timeEl.classList.add("weather__forecasts__time");
+    timeEl.innerHTML = new Date(time * 1000).toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: false,
+    });
 
-  const dailyEl = document.querySelector("#daily");
-  dailyEl.innerHTML = dailyData.map((day) => {
-    const { time, icon, temperatureHigh, temperatureLow } = day;
-    return `
-    <div class="daily-item">
-      <div class="daily-item__time">${time}</div>
-      <div class="daily-item__icon">${icon}</div>
-      <div class="daily-item__temp">${Math.round(temperatureHigh)}&deg;C</div>
-      <div class="daily-item__temp">${Math.round(temperatureLow)}&deg;C</div>
-    </div>
-    `;
+    const iconEl = document.createElement("img");
+    iconEl.classList.add("weather__forecasts__img");
+    iconEl.src = `https://darksky.net/images/weather-icons/${icon}.png`;
+
+    const tempEl = document.createElement("span");
+    tempEl.classList.add("weather__forecasts__temperature");
+    tempEl.innerHTML = `${Math.round(
+      temperature
+    )}<span class="temperature-degree">&#176;</span>`;
+    hourlyContainer.appendChild(timeEl);
+    hourlyContainer.appendChild(iconEl);
+    hourlyContainer.appendChild(tempEl);
+    hourlyEl.appendChild(hourlyContainer);
+
+    console.log(hourlyContainer);
+
+    $(".owl-carousel").owlCarousel();
+    $(".owl-carousel").data("owl.carousel").add([hourlyContainer, 0]);
+    $(".owl-carousel").data("owl.carousel").refresh();
   });
 });
+// hourlyEl.innerHTML = hourlyData.map((hour) => {
+//   const { time, icon, temperature } = hour;
+// return `<div class="item d-flex flex-column align-items-center">
+//                 <p class="weather__forecasts__time">${time}</p>
+//                 <img class="weather__forecasts__img" src="https://darksky.net/images/weather-icons/${icon}.png" alt="">
+//                 <span class="weather__forecasts__temperature">${Math.round(
+//                   temperature
+//                 )}<span
+//                     class="temperature-degree">&#176;</span></span>
+//               </div>`;
+// });
 
-// const { temperature, summary, icon } = data.hourly;
-// const temp = document.querySelector("#temp");
-// temp.innerHTML = `${Math.round(temperature)}&deg;`;
+// display daily weather
+//   const dailyEl = document.querySelector("#daily");
+//   dailyEl.innerHTML = dailyData.map((day) => {
+//     const { time, icon, temperatureHigh, temperatureLow } = day;
+//     return `
+//     <div class="daily-item">
+//       <div class="daily-item__time">${time}</div>
+//       <div class="daily-item__icon">${icon}</div>
+//       <div class="daily-item__temp">${Math.round(temperatureHigh)}&deg;C</div>
+//       <div class="daily-item__temp">${Math.round(temperatureLow)}&deg;C</div>
+//     </div>
+//     `;
+//   });
+// });
 
-// const weather = document.querySelector("#weather");
-// weather.innerHTML = summary;
-
-// const iconImg = document.querySelector("#icon");
-// iconImg.src = `https://darksky.net/images/weather-icons/${icon}.png`;
-
-// Set DOM elements from the API
-// temperatureDegree.textContent = temperature;
-// temperatureDescription.textContent = summary;
-// locationTimezone.textContent = data.timezone;
-// // Set icon
-// setIcons(icon, document.querySelector(".icon"));
 // // Change temperature to Celsius/Fahrenheit
 // temperatureSection.addEventListener("click", () => {
 //   if (temperatureSpan.textContent === "F") {
