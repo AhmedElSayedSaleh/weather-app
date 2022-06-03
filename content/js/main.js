@@ -97,11 +97,16 @@ getData().then((data) => {
     );
     const timeEl = document.createElement("p");
     timeEl.classList.add("weather__forecasts__time");
-    timeEl.innerHTML = new Date(time * 1000).toLocaleTimeString("en-US", {
-      hour: "numeric",
-      minute: "numeric",
-      hour12: false,
-    });
+    // console.log(new Date(time * 1000).getHours());
+    if (new Date(time * 1000).getHours() === new Date().getHours()) {
+      timeEl.innerHTML = "Now";
+    } else {
+      timeEl.innerHTML = new Date(time * 1000).toLocaleTimeString("en-US", {
+        hour: "numeric",
+        minute: "numeric",
+        hour12: false,
+      });
+    }
 
     const iconEl = document.createElement("img");
     iconEl.classList.add("weather__forecasts__img");
@@ -117,7 +122,7 @@ getData().then((data) => {
     hourlyContainer.appendChild(tempEl);
     hourlyEl.appendChild(hourlyContainer);
 
-    console.log(hourlyContainer);
+    // console.log(hourlyContainer);
 
     $(".owl-carousel").owlCarousel();
     $(".owl-carousel").data("owl.carousel").add([hourlyContainer, 0]);
