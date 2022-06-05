@@ -83,10 +83,10 @@
             <div class=" d-flex justify-content-end">
               <div class=" d-flex justify-content-around">
                 <div class="temperature-btn">
-                  <span class="px-5">C</span>
+                  <span class="px-5 tempBtnText">C</span>
                 </div>
                 <div class="temperature-btn temperature-btn--right-active">
-                  <span class="px-5">F</span>
+                  <span class="px-5 tempBtnText">F</span>
                 </div>
               </div>
             </div>
@@ -109,15 +109,18 @@
           <div class="col-md-6">
             <div class=" d-flex flex-column align-items-end">
               <div>
-                <h2 id="temp" class="text-end weather__forecast__current-temperature"></h2>
+                <h2 class="text-end weather__forecast__current-temperature">
+                  <span id="temp"></span>
+                  <span class="temperature-degree">&#176;</span>
+                </h2>
 
               </div>
               <div class="d-flex align-items-end flex-column pe-5">
-                <h4 class="weather__forecast__temperatures-range"><span>81<span
-                      class="temperature-degree">&#176;</span></span>
+                <h4 class="weather__forecast__temperatures-range"><span id="max-temp"></span>
+                  <span class="temperature-degree">&#176;</span>
                   /
-                  <span class="weather__forecast__temperatures-range--min">63<span
-                      class="temperature-degree">&#176;</span></span>
+                  <span id="min-temp" class="weather__forecast__temperatures-range--min"></span>
+                  <span class="temperature-degree">&#176;</span>
                 </h4>
                 <p id="hourly-summary" class="weather__forecast__summary"></p>
               </div>
@@ -150,151 +153,9 @@
               </div>
               <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
                 tabindex="0">
-                <div class="owl-carousel owl-theme pt-5">
-                  <div class="item d-flex flex-column align-items-center">
-                    <p class="weather__forecasts__time">Now</p>
-                    <img class="weather__forecasts__img" src="./content/assets/icons/cloudy.png" alt="">
-                    <span class="weather__forecasts__temperature">81<span
-                        class="temperature-degree">&#176;</span></span>
-                  </div>
-                  <div class="item d-flex flex-column align-items-center">
-                    <p class="weather__forecasts__time">11:00</p>
-                    <img class="weather__forecasts__img" src="./content/assets/icons/cloudy.png" alt="">
-                    <span class="weather__forecasts__temperature">81<span
-                        class="temperature-degree">&#176;</span></span>
-                  </div>
-                  <div class="item d-flex flex-column align-items-center">
-                    <p class="weather__forecasts__time">12:00</p>
-                    <img class="weather__forecasts__img" src="./content/assets/icons/sunny.png" alt="">
-                    <span class="weather__forecasts__temperature">82<span
-                        class="temperature-degree">&#176;</span></span>
-                  </div>
-                  <div class="item d-flex flex-column align-items-center">
-                    <p class="weather__forecasts__time">13:00</p>
-                    <img class="weather__forecasts__img" src="./content/assets/icons/cloudy.png" alt="">
-                    <span class="weather__forecasts__temperature">84<span
-                        class="temperature-degree">&#176;</span></span>
-                  </div>
-                  <div class="item d-flex flex-column align-items-center">
-                    <p class="weather__forecasts__time">14:00</p>
-                    <img class="weather__forecasts__img" src="./content/assets/icons/cloudy.png" alt="">
-                    <span class="weather__forecasts__temperature">86<span
-                        class="temperature-degree">&#176;</span></span>
-                  </div>
-                  <div class="item d-flex flex-column align-items-center">
-                    <p class="weather__forecasts__time">15:00</p>
-                    <img class="weather__forecasts__img" src="./content/assets/icons/cloudy.png" alt="">
-                    <span class="weather__forecasts__temperature">87<span
-                        class="temperature-degree">&#176;</span></span>
-                  </div>
-                  <div class="item d-flex flex-column align-items-center">
-                    <p class="weather__forecasts__time">16:00</p>
-                    <img class="weather__forecasts__img" src="./content/assets/icons/cloudy.png" alt="">
-                    <span class="weather__forecasts__temperature">84<span
-                        class="temperature-degree">&#176;</span></span>
-                  </div>
-                  <div class="item d-flex flex-column align-items-center">
-                    <p class="weather__forecasts__time">17:00</p>
-                    <img class="weather__forecasts__img" src="./content/assets/icons/cloudy.png" alt="">
-                    <span class="weather__forecasts__temperature">80<span
-                        class="temperature-degree">&#176;</span></span>
-                  </div>
-                  <div class="item d-flex flex-column align-items-center">
-                    <p class="weather__forecasts__time">18:00</p>
-                    <img class="weather__forecasts__img" src="./content/assets/icons/cloudy.png" alt="">
-                    <span class="weather__forecasts__temperature">77<span
-                        class="temperature-degree">&#176;</span></span>
-                  </div>
-                  <div class="item d-flex flex-column align-items-center">
-                    <p class="weather__forecasts__time">19:00</p>
-                    <img class="weather__forecasts__img" src="./content/assets/icons/cloudy.png" alt="">
-                    <span class="weather__forecasts__temperature">77<span
-                        class="temperature-degree">&#176;</span></span>
-                  </div>
-                  <div class="item d-flex flex-column align-items-center">
-                    <p class="weather__forecasts__time">20:00</p>
-                    <img class="weather__forecasts__img" src="./content/assets/icons/cloudy.png" alt="">
-                    <span class="weather__forecasts__temperature">77<span
-                        class="temperature-degree">&#176;</span></span>
-                  </div>
-                  <div class="item d-flex flex-column align-items-center">
-                    <p class="weather__forecasts__time">21:00</p>
-                    <img class="weather__forecasts__img" src="./content/assets/icons/cloudy.png" alt="">
-                    <span class="weather__forecasts__temperature">77<span
-                        class="temperature-degree">&#176;</span></span>
-                  </div>
-                  <div class="item d-flex flex-column align-items-center">
-                    <p class="weather__forecasts__time">22:00</p>
-                    <img class="weather__forecasts__img" src="./content/assets/icons/cloudy.png" alt="">
-                    <span class="weather__forecasts__temperature">77<span
-                        class="temperature-degree">&#176;</span></span>
-                  </div>
-                  <div class="item d-flex flex-column align-items-center">
-                    <p class="weather__forecasts__time">23:00</p>
-                    <img class="weather__forecasts__img" src="./content/assets/icons/cloudy.png" alt="">
-                    <span class="weather__forecasts__temperature">77<span
-                        class="temperature-degree">&#176;</span></span>
-                  </div>
-                  <div class="item d-flex flex-column align-items-center">
-                    <p class="weather__forecasts__time">00:00</p>
-                    <img class="weather__forecasts__img" src="./content/assets/icons/cloudy.png" alt="">
-                    <span class="weather__forecasts__temperature">77<span
-                        class="temperature-degree">&#176;</span></span>
-                  </div>
-                  <div class="item d-flex flex-column align-items-center">
-                    <p class="weather__forecasts__time">01:00</p>
-                    <img class="weather__forecasts__img" src="./content/assets/icons/cloudy.png" alt="">
-                    <span class="weather__forecasts__temperature">77<span
-                        class="temperature-degree">&#176;</span></span>
-                  </div>
-                  <div class="item d-flex flex-column align-items-center">
-                    <p class="weather__forecasts__time">02:00</p>
-                    <img class="weather__forecasts__img" src="./content/assets/icons/cloudy.png" alt="">
-                    <span class="weather__forecasts__temperature">77<span
-                        class="temperature-degree">&#176;</span></span>
-                  </div>
-                  <div class="item d-flex flex-column align-items-center">
-                    <p class="weather__forecasts__time">03:00</p>
-                    <img class="weather__forecasts__img" src="./content/assets/icons/cloudy.png" alt="">
-                    <span class="weather__forecasts__temperature">77<span
-                        class="temperature-degree">&#176;</span></span>
-                  </div>
-                  <div class="item d-flex flex-column align-items-center">
-                    <p class="weather__forecasts__time">04:00</p>
-                    <img class="weather__forecasts__img" src="./content/assets/icons/cloudy.png" alt="">
-                    <span class="weather__forecasts__temperature">77<span
-                        class="temperature-degree">&#176;</span></span>
-                  </div>
-                  <div class="item d-flex flex-column align-items-center">
-                    <p class="weather__forecasts__time">05:00</p>
-                    <img class="weather__forecasts__img" src="./content/assets/icons/cloudy.png" alt="">
-                    <span class="weather__forecasts__temperature">77<span
-                        class="temperature-degree">&#176;</span></span>
-                  </div>
-                  <div class="item d-flex flex-column align-items-center">
-                    <p class="weather__forecasts__time">06:00</p>
-                    <img class="weather__forecasts__img" src="./content/assets/icons/cloudy.png" alt="">
-                    <span class="weather__forecasts__temperature">77<span
-                        class="temperature-degree">&#176;</span></span>
-                  </div>
-                  <div class="item d-flex flex-column align-items-center">
-                    <p class="weather__forecasts__time">07:00</p>
-                    <img class="weather__forecasts__img" src="./content/assets/icons/cloudy.png" alt="">
-                    <span class="weather__forecasts__temperature">77<span
-                        class="temperature-degree">&#176;</span></span>
-                  </div>
-                  <div class="item d-flex flex-column align-items-center">
-                    <p class="weather__forecasts__time">08:00</p>
-                    <img class="weather__forecasts__img" src="./content/assets/icons/cloudy.png" alt="">
-                    <span class="weather__forecasts__temperature">77<span
-                        class="temperature-degree">&#176;</span></span>
-                  </div>
-                  <div class="item d-flex flex-column align-items-center">
-                    <p class="weather__forecasts__time">09:00</p>
-                    <img class="weather__forecasts__img" src="./content/assets/icons/cloudy.png" alt="">
-                    <span class="weather__forecasts__temperature">77<span
-                        class="temperature-degree">&#176;</span></span>
-                  </div>
+                <div id="daily" class="owl-carousel owl-theme pt-5">
+                  <!-- data appending from js -->
+                  <!-- data appending from js -->
                 </div>
               </div>
             </div>

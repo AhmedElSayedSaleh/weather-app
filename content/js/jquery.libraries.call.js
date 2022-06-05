@@ -1,7 +1,7 @@
 // ################# forecasts times & dates scroll ###################
 
 $(document).ready(function () {
-  $(".owl-carousel").owlCarousel({
+  $("#hourly").owlCarousel({
     loop: true,
     nav: false,
     dots: true,
@@ -15,6 +15,24 @@ $(document).ready(function () {
       },
       1000: {
         items: 9,
+      },
+    },
+  });
+
+  $("#daily").owlCarousel({
+    loop: true,
+    nav: false,
+    dots: true,
+    loop: false,
+    responsive: {
+      0: {
+        items: 1,
+      },
+      600: {
+        items: 5,
+      },
+      1000: {
+        items: 8,
       },
     },
   });

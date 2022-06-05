@@ -150,6 +150,7 @@ ol {
     font-weight: 700;
     font-size: 3rem; }
   .weather__forecast__current-temperature {
+    display: table-footer-group;
     font-weight: 700;
     font-size: 14.4rem; }
   .weather__forecast__temperatures-range {

@@ -1,31 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Celsius/Fahrenheit buttons toggle
-  const toggleTemp = () => {
-    const tempBtn = document.querySelectorAll(".temperature-btn");
-
-    tempBtn.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        tempBtn.forEach((btn) => {
-          btn.classList.remove("temperature-btn--right-active");
-          btn.classList.remove("temperature-btn--left-active");
-        });
-        if (btn.firstElementChild.innerHTML === "C") {
-          btn.classList.add("temperature-btn--left-active");
-        } else {
-          btn.classList.add("temperature-btn--right-active");
-        }
-      });
-      // if (tempBtnText.innerHTML === "C") {
-      //   tempBtnText.innerHTML = "F";
-      //   // temp.innerHTML = `${Math.round(temp.innerHTML * 9 / 5 + 32)}&deg;F`;
-      // } else {
-      //   tempBtnText.innerHTML = "C";
-      //   // temp.innerHTML = `${Math.round((temp.innerHTML - 32) * 5 / 9)}&deg;C`;
-      // }
-    });
-  };
-  toggleTemp();
-
   // get current date
   const getDate = () => {
     const date = new Date().toLocaleDateString("en-US", {
@@ -51,11 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const response = await fetch(url);
       const data = await response.json();
-      // const {
-      //   currently: { temperature, summary, icon },
-      //   hourly: { data: hourlyData },
-      //   daily: { data: dailyData },
-      // } = data;
       return data;
     } catch (err) {
       console.log(err);
@@ -64,108 +32,198 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // display weather in html
   getData().then((data) => {
-    console.log(data);
+    const temp = document.querySelector("#temp");
+    const minTemp = document.querySelector("#min-temp");
+    const maxTemp = document.querySelector("#max-temp");
+
     const { currently, daily, hourly } = data;
     const { temperature, summary, icon } = currently;
     const { data: hourlyData } = hourly;
     const { data: dailyData } = daily;
 
-    // display current weather
-    const temp = document.querySelector("#temp");
-    temp.innerHTML = `${Math.round(
-      temperature
-    )}<span class="temperature-degree">&#176;</span>`;
+    // display current weather temperature
 
+    const allTemp = [];
+    temp.innerHTML = `${Math.round(temperature)}`;
+
+    // display min temperature
+    const getMinTemp = () => {
+      minTemp.innerHTML = `${Math.round(Math.min(...allTemp))}`;
+    };
+
+    // display max temperature
+    const getMaxTemp = () => {
+      maxTemp.innerHTML = `${Math.round(Math.max(...allTemp))}`;
+    };
+
+    // display current weather icon
     const iconImg = document.querySelector("#icon");
     iconImg.src = `https://darksky.net/images/weather-icons/${icon}.png`;
 
+    // display current weather summary
     const summaryEl = document.querySelector("#summary");
     summaryEl.innerHTML = summary;
 
     const hourlySummary = document.querySelector("#hourly-summary");
     hourlySummary.innerHTML = hourly.summary;
 
-    // display hourly weather
-    const hourlyEl = document.querySelector("#hourly");
-    hourlyData.forEach((hour) => {
-      const { time, icon, temperature } = hour;
-      const hourlyContainer = document.createElement("div");
-      hourlyContainer.classList.add(
+    // create html temp div
+    const createTempDiv = (time, icon, temperature, dataLen) => {
+      const weatherContainer = document.createElement("div");
+      weatherContainer.classList.add(
         "item",
         "d-flex",
         "flex-column",
         "align-items-center"
       );
+
+      // create weather time
       const timeEl = document.createElement("p");
       timeEl.classList.add("weather__forecasts__time");
-      if (new Date(time * 1000).getHours() === new Date().getHours()) {
-        timeEl.innerHTML = "Now";
+
+      if (dataLen.length > 8) {
+        if (new Date(time * 1000).getHours() === new Date().getHours()) {
+          timeEl.innerHTML = "Now";
+        } else {
+          timeEl.innerHTML = new Date(time * 1000).toLocaleTimeString("en-US", {
+            hour: "numeric",
+            minute: "numeric",
+            hour12: false,
+          });
+        }
       } else {
-        timeEl.innerHTML = new Date(time * 1000).toLocaleTimeString("en-US", {
-          hour: "numeric",
-          minute: "numeric",
-          hour12: false,
+        timeEl.innerHTML = new Date(time * 1000).toLocaleDateString("en-US", {
+          weekday: "short",
         });
       }
 
+      // create weather icon
       const iconEl = document.createElement("img");
       iconEl.classList.add("weather__forecasts__img");
       iconEl.src = `https://darksky.net/images/weather-icons/${icon}.png`;
 
+      // create weather temp
+      const tempDiv = document.createElement("div");
+      tempDiv.classList.add("weather__forecasts__temperature");
+
       const tempEl = document.createElement("span");
-      tempEl.classList.add("weather__forecasts__temperature");
-      tempEl.innerHTML = `${Math.round(
-        temperature
-      )}<span class="temperature-degree">&#176;</span>`;
-      hourlyContainer.appendChild(timeEl);
-      hourlyContainer.appendChild(iconEl);
-      hourlyContainer.appendChild(tempEl);
-      hourlyEl.appendChild(hourlyContainer);
+      tempEl.classList.add("weather__forecasts__temperature__value");
+      tempEl.innerHTML = `${Math.round(temperature)}`;
 
-      // console.log(hourlyContainer);
+      const tempDeg = document.createElement("span");
+      tempDeg.classList.add("temperature-degree");
+      tempDeg.innerHTML = "&#176;";
 
-      $(".owl-carousel").owlCarousel();
-      $(".owl-carousel").data("owl.carousel").add([hourlyContainer, 0]);
-      $(".owl-carousel").data("owl.carousel").refresh();
+      tempDiv.appendChild(tempEl);
+      tempDiv.appendChild(tempDeg);
+
+      weatherContainer.appendChild(timeEl);
+      weatherContainer.appendChild(iconEl);
+      weatherContainer.appendChild(tempDiv);
+
+      return weatherContainer;
+    };
+
+    // display hourly weather
+    hourlyData.forEach((hour) => {
+      const weatherContainer = createTempDiv(
+        hour.time,
+        hour.icon,
+        hour.temperature,
+        hourlyData
+      );
+      allTemp.push(hour.temperature);
+
+      // append hourly weather to html by owl carousel
+      $("#hourly").owlCarousel();
+      $("#hourly").data("owl.carousel").add([weatherContainer, 0]);
+      $("#hourly").data("owl.carousel").refresh();
     });
+
+    // min & max temperature calling methods
+    getMinTemp();
+    getMaxTemp();
+
+    // display daily weather
+    dailyData.forEach((day) => {
+      const weatherContainer = createTempDiv(
+        day.time,
+        day.icon,
+        day.temperatureLow,
+        dailyData
+      );
+
+      // append daily weather to html by owl carousel
+      $("#daily").owlCarousel();
+      $("#daily").data("owl.carousel").add([weatherContainer, 0]);
+      $("#daily").data("owl.carousel").refresh();
+    });
+
+    // Celsius/Fahrenheit buttons toggle
+    const toggleTemp = () => {
+      const tempBtn = document.querySelectorAll(".temperature-btn");
+
+      tempBtn.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const temps = document.querySelectorAll(
+            ".weather__forecasts__temperature__value"
+          );
+
+          tempBtn.forEach((btn) => {
+            btn.classList.remove("temperature-btn--right-active");
+            btn.classList.remove("temperature-btn--left-active");
+          });
+          if (btn.firstElementChild.innerHTML === "C") {
+            btn.classList.add("temperature-btn--left-active");
+
+            // main temp
+            temp.innerHTML = `${Math.round(((temp.innerHTML - 32) * 5) / 9)}`;
+
+            // min temp
+            minTemp.innerHTML = `${Math.round(
+              ((minTemp.innerHTML - 32) * 5) / 9
+            )}`;
+
+            // max temp
+            maxTemp.innerHTML = `${Math.round(
+              ((maxTemp.innerHTML - 32) * 5) / 9
+            )}`;
+
+            // hourly temp
+            temps.forEach((temp) => {
+              temp.innerHTML = `${Math.round(((temp.innerHTML - 32) * 5) / 9)}`;
+            });
+          } else {
+            btn.classList.add("temperature-btn--right-active");
+
+            // main temp
+            temp.innerHTML = `${Math.round((temp.innerHTML * 9) / 5 + 32)}`;
+
+            // min temp
+            minTemp.innerHTML = `${Math.round(
+              (minTemp.innerHTML * 9) / 5 + 32
+            )}`;
+
+            // max temp
+            maxTemp.innerHTML = `${Math.round(
+              (maxTemp.innerHTML * 9) / 5 + 32
+            )}`;
+
+            // hourly temp
+            temps.forEach((temp) => {
+              temp.innerHTML = `${Math.round((temp.innerHTML * 9) / 5 + 32)}`;
+            });
+          }
+        });
+        // if (tempBtnText.innerHTML === "C") {
+        //   tempBtnText.innerHTML = "F";
+        // temp.innerHTML = `${Math.round((temp.innerHTML * 9) / 5 + 32)}&deg;F`;
+        // } else {
+        //   tempBtnText.innerHTML = "C";
+        // temp.innerHTML = `${Math.round(((temp.innerHTML - 32) * 5) / 9)}&deg;C`;
+        // }
+      });
+    };
+    toggleTemp();
   });
 });
-
-// hourlyEl.innerHTML = hourlyData.map((hour) => {
-//   const { time, icon, temperature } = hour;
-// return `<div class="item d-flex flex-column align-items-center">
-//                 <p class="weather__forecasts__time">${time}</p>
-//                 <img class="weather__forecasts__img" src="https://darksky.net/images/weather-icons/${icon}.png" alt="">
-//                 <span class="weather__forecasts__temperature">${Math.round(
-//                   temperature
-//                 )}<span
-//                     class="temperature-degree">&#176;</span></span>
-//               </div>`;
-// });
-
-// display daily weather
-//   const dailyEl = document.querySelector("#daily");
-//   dailyEl.innerHTML = dailyData.map((day) => {
-//     const { time, icon, temperatureHigh, temperatureLow } = day;
-//     return `
-//     <div class="daily-item">
-//       <div class="daily-item__time">${time}</div>
-//       <div class="daily-item__icon">${icon}</div>
-//       <div class="daily-item__temp">${Math.round(temperatureHigh)}&deg;C</div>
-//       <div class="daily-item__temp">${Math.round(temperatureLow)}&deg;C</div>
-//     </div>
-//     `;
-//   });
-// });
-
-// // Change temperature to Celsius/Fahrenheit
-// temperatureSection.addEventListener("click", () => {
-//   if (temperatureSpan.textContent === "F") {
-//     temperatureSpan.textContent = "C";
-//     temperatureDegree.textContent = Math.floor((temperature - 32) * (5 / 9));
-//   } else {
-//     temperatureSpan.textContent = "F";
-//     temperatureDegree.textContent = temperature;
-//   }
-// });
-// });

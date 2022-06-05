@@ -42,6 +42,7 @@
     }
 
     &__current-temperature {
+      display: table-footer-group;
       font-weight: 700;
       font-size: 14.4rem;
       // line-height: 1.69;
