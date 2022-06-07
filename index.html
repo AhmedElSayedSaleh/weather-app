@@ -73,12 +73,13 @@
   <main class="weather">
     <!-- *********** #SECTION:start ********** -->
     <section>
-      <div class="container d-flex flex-column justify-content-between">
+      <div class="container d-flex flex-column">
         <!-- *********** #SECTION:start header ********** -->
         <div class="row py-5 weather__head">
           <div class="col-md-6">
             <h1>INSTAWEATHER</h1>
           </div>
+
           <div class="col-md-6">
             <div class=" d-flex justify-content-end">
               <div class=" d-flex justify-content-around">
@@ -98,7 +99,13 @@
         <div class="row pt-5 pb-3 mt-5 weather__forecast">
           <div class="col-md-6">
             <div>
-              <h2 class="text-capitalize weather__forecast__city">new cairo</h2>
+              <!-- <h2 class="text-capitalize weather__forecast__city">new cairo</h2> -->
+              <div class="input-group mb-3">
+                <span class="input-group-text fs-2 fw-bold bg-transparent text-white" id="basic-addon1">Find</span>
+                <input id="cityName" type="text" class="form-control fs-4" placeholder="Enter City"
+                  aria-label="Recipient's username" aria-describedby="basic-addon2">
+              </div>
+              <h4 id="showCity" class="text-capitalize">new cairo</h4>
               <p id="date" class="weather__forecast__date"></p>
             </div>
             <div>

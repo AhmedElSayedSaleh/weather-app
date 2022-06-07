@@ -74,7 +74,11 @@ function minifyLtrCss(cb) {
 
 //#region minifyJs Task
 function minifyJs(cb) {
-  src(["content/js/jquery.libraries.call.js", "content/js/main.js"])
+  src([
+    "content/js/jquery.libraries.call.js",
+    "content/js/citySearch.js",
+    "content/js/main.js",
+  ])
     .pipe(sourcemaps.init())
     .pipe(concat("main.min.js"))
     .pipe(babel({ presets: ["@babel/preset-env"] }))
@@ -92,7 +96,11 @@ function watcher(cb) {
   watch(["content/css/main-ltr.css"], series(minifyLtrCss));
 
   watch(
-    ["content/js/jquery.libraries.call.js", "content/js/main.js"],
+    [
+      "content/js/jquery.libraries.call.js",
+      "content/js/citySearch.js",
+      "content/js/main.js",
+    ],
     minifyJs
   );
 
