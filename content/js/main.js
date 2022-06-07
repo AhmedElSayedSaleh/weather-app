@@ -21,8 +21,17 @@ document.addEventListener("DOMContentLoaded", () => {
       const response = await fetch(url, {
         method: "GET",
         mode: "cors",
-        "Access-Control-Allow-Origin": "*",
-        headers: headers,
+        credentials: "include",
+
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": true,
+          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+          "Access-Control-Allow-Headers":
+            "Content-Type, Authorization, X-Requested-With, Accept, Origin, User-Agent, Cache-Control, X-Requested-With",
+        },
       });
       const data = await response.json();
 
