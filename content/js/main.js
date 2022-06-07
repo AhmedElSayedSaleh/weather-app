@@ -18,21 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
   async function getData() {
     const url = `https://api.darksky.net/forecast/a177f8481c31fa96c3f95ad4f4f84610/${cityData.lat},${cityData.lon}`;
     try {
-      const response = await fetch(url, {
-        method: "GET",
-        mode: "cors",
-        credentials: "include",
-
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Credentials": true,
-          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-          "Access-Control-Allow-Headers":
-            "Content-Type, Authorization, X-Requested-With, Accept, Origin, User-Agent, Cache-Control, X-Requested-With",
-        },
-      });
+      const response = await fetch(url);
       const data = await response.json();
 
       return data;
