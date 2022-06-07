@@ -56,7 +56,8 @@
   src: url("../fonts/Work_Sans/WorkSans-Regular.eot");
   /* IE9 Compat Modes */
   src: url("../fonts/Work_Sans/WorkSans-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/Work_Sans/WorkSans-Regular.woff2") format("woff2"), url("../fonts/Work_Sans/WorkSans-Regular.woff") format("woff"), url("../fonts/Work_Sans/WorkSans-Regular.ttf") format("truetype"), url("../fonts/Work_Sans/WorkSans-Regular.svg#svgFontName") format("svg");
-  /* Legacy iOS */ }
+  /* Legacy iOS */
+  font-display: swap; }
 
 /*
 **  CSS Initializati Reset
