@@ -1,8 +1,7 @@
+// tomtom api key
 const tomtomApiKey = "fzl4lYRf8GT9jgfXRAwA3gsuX2uckhEK";
 
 const getCityLocation = async (city) => {
-  // tomtom api key
-
   const url = `https://api.tomtom.com/search/2/geocode/${city}.json?limit=1&key=${tomtomApiKey}`;
 
   try {
