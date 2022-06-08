@@ -19,6 +19,10 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const response = await fetch(url, {
         method: "GET",
+        cors: [
+          "https://cors-anywhere.herokuapp.com/",
+          "http://localhost:8080/",
+        ],
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
