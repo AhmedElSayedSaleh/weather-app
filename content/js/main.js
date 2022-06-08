@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const response = await fetch(url, {
         method: "GET",
         cors: [
-          "https://cors-anywhere.herokuapp.com/",
+          "https://ahmedelsayedsaleh.github.io/weather-app/",
           "http://localhost:8080/",
         ],
         headers: {
